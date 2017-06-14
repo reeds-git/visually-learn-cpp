@@ -1,0 +1,31 @@
+{
+	"name": "visually-learn-cpp",
+	"version": "1.0.0",
+	"description": "Learn how to code C++ visually",
+	"engines": {
+    "node": "6.11.0"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reeds-git/visually-learn-cpp"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "author": "Reed Atwood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reeds-git/visually-learn-cpp/issues"
+  }
+
+}
