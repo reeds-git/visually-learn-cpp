@@ -1,0 +1,5 @@
+# user can get the node modules themselves by doing "npm install"
+node_modules
+
+# environment variables
+.env
