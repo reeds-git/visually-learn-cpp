@@ -1,15 +1,19 @@
 
 const pg = require('pg');
+if (process.env.DATABASE_URL) {
+	pg.defaults.ssl = true;
 
-var config = {
-  user: process.env.USER_NAME, //env var: PGUSER
-  database: process.env.DB_NAME, //env var: PGDATABASE
-  password: process.env.PWORD, //env var: PGPASSWORD
-  host: process.env.HOST_N, // Server hosting the postgres database
-  port: process.env.PORT_N, //env var: PGPORT
-  max: 10, // max number of clients in the pool
-  idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
-};
+}
+
+let config = process.env.DATABASE_URL || {
+	  user: process.env.USER_NAME, //env var: PGUSER
+	  database: process.env.DB_NAME, //env var: PGDATABASE
+	  password: process.env.PWORD, //env var: PGPASSWORD
+	  host: process.env.HOST_N, // Server hosting the postgres database
+	  port: process.env.PORT_N, //env var: PGPORT
+	  max: 10, // max number of clients in the pool
+	  idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
+	};
 
 //this initializes a connection pool
 //it will keep idle connections open for 30 seconds
