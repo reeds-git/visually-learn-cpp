@@ -1,5 +1,5 @@
 // first get the environment variables
-//require('dotenv/config');
+require('dotenv/config');
 
 const express = require('express');
 const app = express();
