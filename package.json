@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Learn how to code C++ visually",
   "engines": {
-    "node": "6.11.0"
+    "node": "^6.11.0"
   },
   "main": "server.js",
   "scripts": {
