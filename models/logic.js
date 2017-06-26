@@ -2,7 +2,7 @@
 const pg = require('pg');
 
 if (process.env.DATABASE_URL) {
-	console.log(" I have database url = " + DATABASE_URL + "             FFFFFFFFFFFFFFFFFFF");
+	console.log(" I have database url = " + process.env.DATABASE_URL + "             FFFFFFFFFFFFFFFFFFF");
 	pg.defaults.ssl = true;
 }
 else
