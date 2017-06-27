@@ -59,7 +59,7 @@ function getTopic(topic, callback) {
 
 	var qStr = 'SELECT name, description, help_tip, location FROM topic t JOIN image i ON i.topic_id=t.id WHERE name = $1;';
 
-  	 var results = pool.query(qStr, 
+  	var results = pool.query(qStr, 
   	 	[topic], function (err, result) {
 
   		if(err) {
