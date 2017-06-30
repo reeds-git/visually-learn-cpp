@@ -1,0 +1,12 @@
+.highlight {
+	background-color: blue;
+	color: white;
+}
+
+.indent {
+	padding-left: 10px;
+}
+
+header, main, footer {
+	margin-left: 300px;
+}

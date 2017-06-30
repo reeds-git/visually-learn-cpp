@@ -1,7 +1,6 @@
 
 const pg = require('pg');
 
-
 var config = {};
 
 if (process.env.DATABASE_URL) {
@@ -10,8 +9,6 @@ if (process.env.DATABASE_URL) {
 }
 else
 {
-	console.log(" not fdsafds              ");
-
 	config = {
 	  user: process.env.USER_NAME, //env var: PGUSER
 	  database: process.env.DB_NAME, //env var: PGDATABASE
@@ -46,7 +43,7 @@ function getTopics(callback) {
  		   	results.push({ name: result.rows[i].name });
  		   }
  		  
- 			console.log(JSON.stringify(results));
+ 			//console.log(JSON.stringify(results));
  			callback(null, results);
  		}
    });
@@ -55,7 +52,6 @@ function getTopics(callback) {
 function getTopic(topic, callback) {
 
 	console.log("x topic = " + topic);
-
 
 	var qStr = 'SELECT name, description, help_tip, location FROM topic t JOIN image i ON i.topic_id=t.id WHERE name = $1;';
 
@@ -70,10 +66,11 @@ function getTopic(topic, callback) {
 
  		   for (var i = result.rows.length - 1; i >= 0; i--) {
 					results.push({  name: result.rows[i].name,  
-								discription: result.rows[i].discription, 
-										  url: result.rows[i].url });
+								description: result.rows[i].description, 
+									help_tip: result.rows[i].help_tip,
+									location: result.rows[i].location });
 				}
- 		  
+
  			callback(null, results);
  		}
    });
@@ -84,7 +81,6 @@ function searchTopic(search, callback) {
 	search = '%'+search+'%';
 
 	console.log("x search = " + search);
-
 
 	var qStr = 'SELECT name FROM topic WHERE name LIKE $1;';
 

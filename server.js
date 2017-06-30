@@ -9,12 +9,15 @@ const topicController = require('./controllers/model.js');
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
+//app.use(favicon(__dirname + '/public/images/.ico'));
 
 // views is directory for all template files
 app.set('views', __dirname + '/views/pages');
 app.set('view engine', 'ejs');
 
-app.get('/', function (req, res) { res.sendFile(__dirname + '/public/home.html'); });
+app.get('/', function (req, res) { res.sendFile(__dirname + '/public/html/home.html'); });
+
+app.get('/home.html', function (req, res) { res.sendFile(__dirname + '/public/html/home.html'); });
 
 app.get('/topics', topicController.handelAll);
 
