@@ -29,7 +29,7 @@ function getTopics(callback) {
 	  
 	console.log('Connected to postgres!');
 
-	var qStr = 'SELECT name FROM topic;';
+	var qStr = 'SELECT id, name FROM topic;';
 
   	pool.query(qStr, function (err, result) {
 
@@ -40,7 +40,8 @@ function getTopics(callback) {
  		   var results = [];
 
  		   for (var i = result.rows.length - 1; i >= 0; i--) {
- 		   	results.push({ name: result.rows[i].name });
+ 		   	results.push({  cid: result.rows[i].id, 
+ 		   						name: result.rows[i].name });
  		   }
  		  
  			//console.log(JSON.stringify(results));
@@ -53,7 +54,7 @@ function getTopic(topic, callback) {
 
 	console.log("x topic = " + topic);
 
-	var qStr = 'SELECT name, description, help_tip, location FROM topic t JOIN image i ON i.topic_id=t.id WHERE name = $1;';
+	var qStr = 'SELECT name, description, help_tip, location FROM topic WHERE name = $1;';
 
   	var results = pool.query(qStr, 
   	 	[topic], function (err, result) {
@@ -65,16 +66,18 @@ function getTopic(topic, callback) {
  		   var results = [];
 
  		   for (var i = result.rows.length - 1; i >= 0; i--) {
-					results.push({  name: result.rows[i].name,  
-								description: result.rows[i].description, 
-									help_tip: result.rows[i].help_tip,
-									location: result.rows[i].location });
-				}
+
+				results.push({  name: result.rows[i].name,
+							description: result.rows[i].description, 
+								help_tip: result.rows[i].help_tip,
+								location: result.rows[i].location });
+			}
 
  			callback(null, results);
  		}
    });
 }
+
 
 function searchTopic(search, callback) {
 	  
@@ -82,7 +85,7 @@ function searchTopic(search, callback) {
 
 	console.log("x search = " + search);
 
-	var qStr = 'SELECT name FROM topic WHERE name LIKE $1;';
+	var qStr = 'SELECT id, name FROM topic WHERE name LIKE $1;';
 
   	 var results = pool.query(qStr, 
   	 	[search], function (err, result) {
@@ -94,7 +97,9 @@ function searchTopic(search, callback) {
  		   var results = [];
 
  		   for (var i = result.rows.length - 1; i >= 0; i--) {
-					results.push({  name: result.rows[i].name });
+					results.push({  
+						 cid: result.rows[i].id,
+						name: result.rows[i].name });
 				}
  		  
  			callback(null, results);

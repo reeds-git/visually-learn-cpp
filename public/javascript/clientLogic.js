@@ -8,23 +8,7 @@ $(document).ready(function() {
 	
 			displayItem(data1);
 		});
-
 	});
-
-
-
-  //displayMenu(data);
-
-	// add onclick to display a topic
-	// $("#menu li").click(function () {
-
-		// the list item that was clicked will get that info
-		//$(this).ajax(url, settings, settings)
-		// change color of background
-		// $(this).toggleClass("highlight");
-		//var clickedName = $(this).val()
-	// })
-
 
 	// Initialize collapse button
 	//$(".button-collapse").sideNav();
@@ -33,6 +17,9 @@ $(document).ready(function() {
  	 
 });
 
+/****************************************************************************
+* 
+****************************************************************************/
 function displayItem(data) {
 
 	if (data && data.length > 0) {
@@ -41,31 +28,45 @@ function displayItem(data) {
 		resultList.empty();
 
 		var name = data[0].name;
-		var description = data[0].description;
-		var help_tip = data[0].help_tip;
-		var location = data[0].location;
+		var resultList = document.createElement("h2");
+		resultList.innerText = name;
+		document.getElementById("result").appendChild(resultList);
 
-		resultList.append("<h2>" + name + "</h2>");
-		resultList.append("<h5>" + description + "</h5>");
-		resultList.append("<h5>" + help_tip + "</h5>");
-		resultList.append("<img class=\"responsive-img\" src=\"../images/" + location + "\" alt=\"" + location +"\">");
+		var description = data[0].description;
+		var resultList = document.createElement("h5");
+		resultList.innerText = description;
+		document.getElementById("result").appendChild(resultList);
+
+		var help_tip = data[0].help_tip;
+		var resultList = document.createElement("h5");
+		resultList.innerText = help_tip;
+		document.getElementById("result").appendChild(resultList);
+
+		var location = data[0].location;
+		var resultList = document.createElement("img");
+		resultList.src = "../images/" + location;
+		resultList.alt = location;
+		document.getElementById("result").appendChild(resultList);
+
+		$("#result img").addClass("responsive-img");
 	}
 }
 
+/****************************************************************************
+* 
+****************************************************************************/
 function displayMenu(obj) {
 
 	for (var i = obj.length - 1; i >= 0; i--) {
 
-	var x = document.createElement("li")
-	var z = obj[i].name;
+		var topic = obj[i].name;
+		var id = obj[i].cid;
 
-	var tag = document.createElement("li");
-	tag.innerText = z;
+		$("#menu").append("<li><a id=\""+ id +"\" onclick=\"getTopic(this)\" class=\"btn\">"+topic+"</a></li>");
 
-	document.getElementById("menu-item").appendChild(tag);
 	}
 
-	var name = $("#menu-item li:first").text();
+	var name = $("#menu li:first").text();
 
 	return name;
 }	
@@ -92,30 +93,46 @@ function search() {
 	  xhttp.send();
 }
 
+/****************************************************************************
+* 
+****************************************************************************/
 function display(obj) {
 
-			console.log(obj);
-			for (var i = obj.Search.length - 1; i >= 0; i--) {
+	console.log(obj);
+	for (var i = obj.Search.length - 1; i >= 0; i--) {
 
-				console.log(obj.Search[i].Poster + " " + 
-								 obj.Search[i].Title + " " + 
-								 obj.Search[i].Year  + " " +
-								 obj.Search[i].imdbID);
+		console.log(obj.Search[i].Poster + " " + 
+						 obj.Search[i].Title + " " + 
+						 obj.Search[i].Year  + " " +
+						 obj.Search[i].imdbID);
 
 //<img src=\""+ obj.Search[i].Poster + "\" alt=\"pic" + i + "\" style=\"width:100px;height:100px;\">
-				var x = document.createElement("img")
+		var x = document.createElement("img")
 
-				x.src = obj.Search[i].Poster;
-				x.alt = "pic" + i;
-				x.style = "width:100px;height:100px";
-				document.getElementById("result").appendChild(x);
+		x.src = obj.Search[i].Poster;
+		x.alt = "pic" + i;
+		x.style = "width:100px;height:100px";
+		document.getElementById("result").appendChild(x);
 
-				var z = " Title: " + obj.Search[i].Title + 
-						  " Year: "  + obj.Search[i].Year  + 
-						  " IMDB: "  + obj.Search[i].imdbID;
-				var tag = document.createElement("h4");
-				tag.innerText = z;
-				document.getElementById("result").appendChild(tag);
-			}	
+		var z = " Title: " + obj.Search[i].Title + 
+				  " Year: "  + obj.Search[i].Year  + 
+				  " IMDB: "  + obj.Search[i].imdbID;
+		var tag = document.createElement("h4");
+		tag.innerText = z;
+		document.getElementById("result").appendChild(tag);
+	}
+}
 
-		}
+/***************************************************************************
+* 
+***************************************************************************/
+function getTopic(event) {
+
+	console.log("The cur Tag '" + event.id + "'");
+	var topic = document.getElementById(event.id).text;
+	console.log("topic " + topic);
+	$.get("/display/" + topic, function (data1, status) {
+	
+		displayItem(data1);
+	});
+}
