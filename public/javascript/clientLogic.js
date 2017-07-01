@@ -1,3 +1,6 @@
+/****************************************************************************
+* set everything up
+****************************************************************************/
 $(document).ready(function() {
 
 	$.get("/topics", function (data, status) {
@@ -10,6 +13,9 @@ $(document).ready(function() {
 		});
 	});
 
+
+	$('.tooltipped').tooltip({delay: 50});
+
 	// Initialize collapse button
 	//$(".button-collapse").sideNav();
  	// Initialize collapsible (uncomment the line below if you use the drop-down variation)
@@ -18,7 +24,7 @@ $(document).ready(function() {
 });
 
 /****************************************************************************
-* 
+* display a topic and it's information to the user
 ****************************************************************************/
 function displayItem(data) {
 
@@ -53,7 +59,7 @@ function displayItem(data) {
 }
 
 /****************************************************************************
-* 
+* create the menu of topics
 ****************************************************************************/
 function displayMenu(obj) {
 
@@ -63,7 +69,6 @@ function displayMenu(obj) {
 		var id = obj[i].cid;
 
 		$("#menu").append("<li><a id=\""+ id +"\" onclick=\"getTopic(this)\" class=\"btn\">"+topic+"</a></li>");
-
 	}
 
 	var name = $("#menu li:first").text();
@@ -72,65 +77,62 @@ function displayMenu(obj) {
 }	
 
 /****************************************************************************
-* 
+* send the search topic to to server
 ****************************************************************************/
-function search() {
+function search(topic) {
 
-	document.getElementById("result").innerHTML = "";
-
-	var temp = document.getElementById("search").value;
-	console.log(temp);
-
-	var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	    	var obj = JSON.parse(this.responseText);
-	    	display(obj);
-	    }
-	  };
-
-	  xhttp.open("GET", "/topics", true);
-	  xhttp.send();
+	$.get("/search/" + topic, function (data1, status) {
+	
+		displaySeach(data1);
+	});
 }
 
 /****************************************************************************
-* 
+* lowercase and remove everything but letters and spaces
 ****************************************************************************/
-function display(obj) {
+function sanatize() {
 
-	console.log(obj);
-	for (var i = obj.Search.length - 1; i >= 0; i--) {
 
-		console.log(obj.Search[i].Poster + " " + 
-						 obj.Search[i].Title + " " + 
-						 obj.Search[i].Year  + " " +
-						 obj.Search[i].imdbID);
+	var text = document.getElementById("search").value;
+	clean = text.toLowerCase();
 
-//<img src=\""+ obj.Search[i].Poster + "\" alt=\"pic" + i + "\" style=\"width:100px;height:100px;\">
-		var x = document.createElement("img")
+	clean = clean.replace(/[^a-z ]/g,'');
 
-		x.src = obj.Search[i].Poster;
-		x.alt = "pic" + i;
-		x.style = "width:100px;height:100px";
-		document.getElementById("result").appendChild(x);
+	//if (text == clean) {
 
-		var z = " Title: " + obj.Search[i].Title + 
-				  " Year: "  + obj.Search[i].Year  + 
-				  " IMDB: "  + obj.Search[i].imdbID;
-		var tag = document.createElement("h4");
-		tag.innerText = z;
-		document.getElementById("result").appendChild(tag);
+		document.getElementById("error").innerHTML = "";
+
+		document.getElementById("result").innerHTML = "";
+		
+		search(text);
+
+	// } else {
+		
+	// 	document.getElementById("error").innerHTML = "Please enter only letters and spaces";
+	// }
+}
+
+/****************************************************************************
+* create the list of topics found from the search
+****************************************************************************/
+function displaySeach(obj) {
+
+	for (var i = obj.length - 1; i >= 0; i--) {
+
+		var topic = obj[i].name;
+		var id = obj[i].cid;
+
+		$("#result").append("<li><a id=\""+ id +"\" onclick=\"getTopic(this)\" class=\"btn-flat\">"+topic+"</a></li>");
 	}
 }
 
 /***************************************************************************
-* 
+* send the topic to the server to get the information
 ***************************************************************************/
 function getTopic(event) {
 
-	console.log("The cur Tag '" + event.id + "'");
 	var topic = document.getElementById(event.id).text;
-	console.log("topic " + topic);
+
 	$.get("/display/" + topic, function (data1, status) {
 	
 		displayItem(data1);

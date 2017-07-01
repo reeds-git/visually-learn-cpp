@@ -25,6 +25,9 @@ else
 //and set a limit of maximum 10 idle clients
 const pool = new pg.Pool(config);
 
+/**********************************************************************
+* get the list of all topics
+**********************************************************************/
 function getTopics(callback) {
 	  
 	console.log('Connected to postgres!');
@@ -43,16 +46,20 @@ function getTopics(callback) {
  		   	results.push({  cid: result.rows[i].id, 
  		   						name: result.rows[i].name });
  		   }
- 		  
- 			//console.log(JSON.stringify(results));
+
  			callback(null, results);
  		}
    });
 }
 
+/**********************************************************************
+* get a specific topic
+**********************************************************************/
 function getTopic(topic, callback) {
 
 	console.log("x topic = " + topic);
+
+	topic = sanatize(topic);
 
 	var qStr = 'SELECT name, description, help_tip, location FROM topic WHERE name = $1;';
 
@@ -78,8 +85,12 @@ function getTopic(topic, callback) {
    });
 }
 
-
+/**********************************************************************
+* search for a topic
+**********************************************************************/
 function searchTopic(search, callback) {
+
+	search = sanatize(search);
 	  
 	search = '%'+search+'%';
 
@@ -107,6 +118,21 @@ function searchTopic(search, callback) {
    });
 }
 
+/**********************************************************************
+* lowercase and remove everything but letters and spaces
+**********************************************************************/
+function sanatize(topic) {
+
+	clean = topic.toLowerCase();
+
+	clean = clean.replace(/[^a-z ]/g,'');
+
+	return clean;
+}
+
+/**********************************************************************
+* send out the functions
+**********************************************************************/
 module.exports = {
 
 	getTopics: getTopics,

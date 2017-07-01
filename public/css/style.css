@@ -10,3 +10,8 @@
 header, main, footer {
 	margin-left: 300px;
 }
+
+.errorText {
+	color: red;
+	margin-right: 50px;
+}
