@@ -98,7 +98,7 @@ function sanatize() {
 
 	clean = clean.replace(/[^a-z ]/g,'');
 
-	//if (text == clean) {
+	if (text == clean) {
 
 		document.getElementById("error").innerHTML = "";
 
@@ -106,10 +106,10 @@ function sanatize() {
 		
 		search(text);
 
-	// } else {
+	} else {
 		
-	// 	document.getElementById("error").innerHTML = "Please enter only letters and spaces";
-	// }
+		document.getElementById("error").innerHTML = "Please enter only letters and spaces";
+	}
 }
 
 /****************************************************************************
