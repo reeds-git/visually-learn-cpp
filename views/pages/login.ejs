@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<% include ../partials/head.ejs %>
+</head>
+<body>
+	<header>
+		<% include ../partials/loginHeader.ejs %>
+	</header>
+	<main>
+		<div class="row">
+			<div class="col s12 m5 l5 offset-s6 push-s3 push-m3 push-l3">
+				<div class="card blue lighten-5">
+					<div class="card-content">
+						<label for="username">User Name: </label>
+						<input type="text" id="username" placeholder="username">
+						<label for="password">Password: </label>
+						<input type="password" id="password" placeholder="password">
+						<label for="confirmPassword">confirm Password: </label>
+						<input type="password" id="confirmPassword" placeholder="password">
+					</div>
+					<div class="card-action blue lighten-5">
+						<button class="btn" onclick="login();">Log in</button>
+						<button class="btn" onclick="logout();">Log out</button>
+					</div>
+					<div id="message" class="card-content hide">
+						<div id="status"></div>
+						<div id="error"></div>
+						<div id="error1"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

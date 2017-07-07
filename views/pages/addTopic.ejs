@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Topic</title>
+	<% include ../partials/head.ejs %>
+		<link rel="stylesheet" href="./css/style.css">
+		<script src="../javascript/clientLogic.js"></script>
+
+
+</head>
+<body>
+	<header>
+		<% include ../partials/header.ejs %>
+		<% include ../partials/menu.ejs %>
+	</header>
+	<main>
+		<div class="row">
+			<div class="col s12 m5 l5 offset-s6 push-s3 push-m3 push-l3">
+				<div class="card blue lighten-5">
+					<div class="card-content">
+						<label for="topicName">Topic Name: </label>
+						<input type="text" id="topicName" placeholder="for loop">
+
+						<label for="description">Description: </label>
+						<input type="text" id="description" placeholder="run code a set number of times">
+
+						<label for="tip">Helpful Tips: </label>
+						<input type="text" id="tip" placeholder="optional">
+
+						<label for="location">Picture Name: </label>
+						<input type="text" id="location" placeholder="forloop.gif">
+					</div>
+					<div class="card-action blue lighten-5">
+						<button class="btn" onclick="addTopic();">Add Topic</button>
+					</div>
+					<div id="message" class="card-content hide">
+						<div id="status"></div>
+						<div id="error"></div>
+						<div id="error1"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

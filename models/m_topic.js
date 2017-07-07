@@ -131,11 +131,24 @@ function sanatize(topic) {
 }
 
 /**********************************************************************
+* 
+**********************************************************************/
+function addTopic(topic, callback) {
+
+	console.log("in add topic ");
+
+	var results = {};
+
+	callback(null, results);
+}
+
+/**********************************************************************
 * send out the functions
 **********************************************************************/
 module.exports = {
 
 	getTopics: getTopics,
 	getTopic: getTopic,
-	searchTopic: searchTopic
+	searchTopic: searchTopic,
+	addTopic: addTopic
 };

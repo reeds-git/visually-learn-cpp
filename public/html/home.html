@@ -4,12 +4,7 @@
 	<!-- J query stuff -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-		<script type=\"text/javascript\" src=\"https://code.jquery.com/jquery-2.1.1.min.js\"></script>
-
-	<!-- Boot Strap Stuff -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
 	<!-- Materialize Stuff -->
 		<!-- Compiled and minified CSS -->
@@ -22,8 +17,6 @@
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	<!-- My Stuff -->
-		<!-- <script src="../javascript/ready.js"></script> -->
-
 		<script src="../javascript/clientLogic.js"></script>
 		
 		<link rel="stylesheet" href="./css/style.css">
@@ -47,10 +40,14 @@
 		         <label class="label-icon" for="search">
 		         <button type="button" onclick="sanatize();"><i class="material-icons">search</i></label></button>
 	         </div>
-
 	      </div>
 	   </nav>
 			<div class="side-nav fixed indent">
+				<ul>
+					<li>
+						<a class="btn" id="addTopic" href="/addTopic">Add Topic</a>
+					</li>
+				</ul>
 				<ul id="menu"></ul>
 		   </div>
 	</header>
