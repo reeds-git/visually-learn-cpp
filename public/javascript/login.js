@@ -31,21 +31,6 @@ function logout() {
 }
 
 /**************************************************************************
-* get the time that a request was made
-**************************************************************************/
-function getServerTime() {
-	$.get("/time", function(result) {
-		if (result && result.success) {
-			$("#status").text("Server time: " + result.time);
-		} else {
-			$("#status").text("Got a result back, but it wasn't a success. Your response should have had a 401 status code.");
-		}
-	}).fail(function(result) {
-		$("#status").text("Could not get server time.");
-	});
-}
-
-/**************************************************************************
 * ensure that the user name and password fields can do injection attacks
 **************************************************************************/
 function validateInput(obj) {

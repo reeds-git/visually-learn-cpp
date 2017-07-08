@@ -1,8 +1,3 @@
-// const express = require('express');
-// const app = express();
-
-
-// const expressSession = require('express-session');
 
 const loginModel = require('../models/m_login.js');
 
@@ -29,8 +24,6 @@ function handelLogin(req,res) {
 function handelLogout(req,res) {
 
 	console.log("Logout");
-
-	//var x = ;
 
 	loginModel.logout(function (err, result) {
 		res.json(result);

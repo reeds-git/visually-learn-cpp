@@ -73,7 +73,9 @@ function handelSearchQuery(req, res) {
 **************************************************************************/
 function handelAddTopic(req, res) {
 
-	console.log("in Handel New ");
+	logicModel.addTopic(req, function(err, result) {
+		res.json(result);
+	});
 }
 
 /**************************************************************************

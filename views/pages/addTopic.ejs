@@ -3,10 +3,8 @@
 <head>
 	<title>Add Topic</title>
 	<% include ../partials/head.ejs %>
-		<link rel="stylesheet" href="./css/style.css">
-		<script src="../javascript/clientLogic.js"></script>
-
-
+	<link rel="stylesheet" href="./css/style.css">
+	<script src="../javascript/admin.js"></script>
 </head>
 <body>
 	<header>
@@ -34,9 +32,8 @@
 						<button class="btn" onclick="addTopic();">Add Topic</button>
 					</div>
 					<div id="message" class="card-content hide">
-						<div id="status"></div>
-						<div id="error"></div>
-						<div id="error1"></div>
+						<ul id="messageList">
+						</ul>
 					</div>
 				</div>
 			</div>
