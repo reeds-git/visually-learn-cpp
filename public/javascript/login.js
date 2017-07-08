@@ -12,7 +12,12 @@ function login() {
 		  type: "POST",
 		  url: "/login",
 		  data: results,
-		  success: results.success
+		  success: function(data) {
+
+				if (data !== null) {
+		  			displayErrors(data);
+		  		}
+			}
 		});
 	}
 }
@@ -35,10 +40,8 @@ function logout() {
 **************************************************************************/
 function validateInput(obj) {
 	
-	$("#status").text("");
-
-	var errorMessage = "";
-
+	var errorMessage = [];
+	
 	if ((obj.username != "" && obj.username != null && 
 		 obj.password != "" && obj.password != null &&
 		 obj.confirmPassword != "" && obj.confirmPassword != null )&& 
@@ -49,28 +52,21 @@ function validateInput(obj) {
 
 	} else {
 
-		errorMessage = "Please enter Valid User Name and Passwords";
-		$("#status").text(errorMessage);
-		document.getElementById("message").classList.remove('hide');
+		if (obj.username == "" || !(/^[A-Za-z]+$/.test(obj.username))) {
+			errorMessage.push("Please enter Valid User Name");
+		}
 
 		if (obj.password.length < 8) {
 		
-			errorMessage = "Passwords must be more than 8 characters";
-			$("#error").text(errorMessage);
-		
-		} else {
-			$("#error").text("");
+			errorMessage.push("Passwords must be more than 8 characters");
 		}
 
 		if (obj.password !== obj.confirmPassword) {
 		
-			errorMessage = "Passwords don't match";
-			$("#error1").text(errorMessage);
-
-		} else {
-			$("#error1").text("");
+			errorMessage.push("Passwords don't match");
 		}
 
+		displayErrors(errorMessage);
 		obj.success = false;
 	}
 
@@ -94,4 +90,20 @@ function getParams() {
 	};
 
 	return result;	
+}
+
+/**************************************************************************
+* Print the list of errors to help the user correctly fill out the form
+**************************************************************************/
+function displayErrors(errors) {
+
+	// Clear errors that have been fixed
+	$("#message ul").empty();
+
+	document.getElementById("message").classList.remove('hide');
+
+	for (var i = 0; i < errors.length; i++) {
+		
+		$("#messageList").append("<li id='e"+ i + "'>" + errors[i] + "</li>");
+	}
 }

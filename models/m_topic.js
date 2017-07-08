@@ -135,24 +135,19 @@ function sanatize(topic) {
 **********************************************************************/
 function addTopic(req1, callback) {
 
-	console.log("in add topic ");
 	var result = validateNewTopic(req1);
+	var errorList = [];
 
 	if (result.data === null) {
-
-		var errorList = [];
 
 		for (i in result.errors) {
 
 			errorList[i] = result.errors[i].msg;
 		}
-		console.log("5555555555555555555555555dddddddddddddddddddddddddddd ");
 
 		callback(null, errorList);
 
 	} else {
-
-		console.log(" I had no errors fdsafdsafsadddddddd " + result.data.topicName);
 
 		var values = [
 			result.data.topicName, 
@@ -166,13 +161,13 @@ function addTopic(req1, callback) {
 	  	var results = pool.query(qStr, values, function (err, result) {
 
 	  		if(err) {
-	  		    console.error(err.stack);
-	  		}
+
+	  		    errorList = ["Unable to add because the topic is a duplicate"];
+			}
+
+			callback(null, errorList);
 	   });
-
-	callback(null, null);
 	}
-
 }
 
 /**********************************************************************
@@ -189,9 +184,10 @@ function validateNewTopic(req2) {
 
 	/****************************  Validate ************************/
 	req2.checkBody('topicName', 'Enter a topic name').notEmpty();
-	req2.check('topicName', 'Enter a topic name that includes spaces and letters').matches(/^[A-Za-z ]+$/,"i");
-	req2.checkBody('location', 'Enter a picture file name with extension').notEmpty();
-	req2.check('location', 'Enter a file name that includes letters and "." (file.gif)').matches(/^[A-Za-z0-9-]+\.[A-Za-z]{3}$/,"i");
+	req2.checkBody('topicName', 'Topics includes spaces and letters').matches(/^[A-Za-z ]+$/,"i");
+
+	req2.checkBody('location', 'Enter a picture file name').notEmpty();
+	req2.check('location', 'File names must include letters and "." i.e. (file.gif)').matches(/^[A-Za-z0-9-]+\.[A-Za-z]{3}$/,"i");
 
 	req2.checkBody('description', 'Enter a description').notEmpty();
 
@@ -204,6 +200,9 @@ function validateNewTopic(req2) {
 
 	} else {
 		
+		/********************* sanitize *************************
+		* Prevent injection attacks
+		*********************************************************/
 		req2.sanitize('topicName').escape();
 		req2.sanitize('location').escape();
 		req2.sanitize('description').escape();

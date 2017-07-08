@@ -4,26 +4,20 @@
 function addTopic() {
 
 	var params = getParams();
-	var results = params;//validateInput(params);
+	var results = validateInput(params);
 
 	if (results.success) {
-		console.log("success resurld ");
+
 		$.ajax({
 		  	type: "POST",
 		 	 url: "/add",
 			data: results,
 		success: function(data) {
 
-		console.log("(data !== null)" + (data !== null));
-
 				if (data !== null) {
 		  			displayErrors(data);
-		  		} else {
-
-		console.log("555  no errors 55555 ");
-}
-
-		  }
+		  		}
+			}
 		});
 	}
 }
@@ -33,45 +27,35 @@ function addTopic() {
 **************************************************************************/
 function validateInput(obj) {
 	
-	$("#status").text("");
-
-	var errorMessage = "";
+	var errorMessage = [];
 
 	if (obj.topicName != "" && obj.topicName != null &&
 		 obj.location != "" && obj.location != null && 
 		 obj.description != "" && obj.description != null &&
 		 obj.tip != "" && obj.tip != null ) {
 			
-	console.log("all filled out");
+		console.log("all filled out");
 
 		document.getElementById("message").classList.add('hide');
 
 	} else {
 
-	console.log("error");
+		if (obj.topicName == "" || !(/^[A-Za-z ]+$/.test(obj.topicName))) {
 
-		// errorMessage = "Please enter Valid User Name and Passwords";
-		// $("#status").text(errorMessage);
-		// document.getElementById("message").classList.remove('hide');
-
-		// if (obj.description.length < 8) {
+			errorMessage.push("Enter a topic name that includes spaces and letters");
+		}
 		
-		// 	errorMessage = "Passwords must be more than 8 characters";
-		// 	$("#error").text(errorMessage);
+		if (obj.description == "") {
 		
-		// } else {
-		// 	$("#error").text("");
-		// }
+			errorMessage.push("Please enter a description");
+		}
 
-		// if (obj.description !== obj.tip) {
+		if (obj.location == "" || !(/^[A-Za-z0-9-]+\.[A-Za-z]{3}$/.test(obj.location))) {
 		
-		// 	errorMessage = "Passwords don't match";
-		// 	$("#error1").text(errorMessage);
+			errorMessage.push('Enter a file name that includes letters and "." (file.gif)');
+		}
 
-		// } else {
-		// 	$("#error1").text("");
-		// }
-
+		displayErrors(errorMessage);
 		obj.success = false;
 	}
 
@@ -100,7 +84,7 @@ function getParams() {
 }
 
 /**************************************************************************
-* 
+* Print the list of errors to help the user correctly fill out the form
 **************************************************************************/
 function displayErrors(errors) {
 
