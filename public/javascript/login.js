@@ -3,6 +3,8 @@
 **************************************************************************/
 function login() {
 
+	$("#status").text("");
+
 	var params = getParams();
 	var results = validateInput(params);
 
@@ -26,11 +28,19 @@ function login() {
 * log out to the system
 **************************************************************************/
 function logout() {
-	$.post("/logout", function(result) {
-		if (result && result.success) {
-			$("#status").text("Successfully logged out.");
-		} else {
-			$("#status").text("Error logging out.");
+
+	$("#message ul").empty();
+
+	$.ajax({
+	  type: "POST",
+	  url: "/logout",
+	  success: function(data) {
+
+			if (data && data.success) {
+				$("#status").text("Successfully logged out.");
+			} else {
+				$("#status").text("Error logging out.");
+			}
 		}
 	});
 }

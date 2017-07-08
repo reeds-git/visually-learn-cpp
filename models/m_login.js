@@ -49,14 +49,12 @@ function login(info, callback) {
 /**************************************************************************
 * log out to the system
 **************************************************************************/
-function logout() {
-	$.post("/logout", function(result) {
-		if (result && result.success) {
-			$("#status").text("Successfully logged out.");
-		} else {
-			$("#status").text("Error logging out.");
-		}
-	});
+function logout(callback) {
+
+console.log("           ssssssssssssssssssssss  ")
+	var result = { success: true };
+
+	callback(null, result);
 }
 
 /**********************************************************************
