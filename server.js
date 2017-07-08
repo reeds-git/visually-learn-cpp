@@ -3,7 +3,7 @@ require('dotenv/config');
 
 const express = require('express');
 const app = express();
-const expressSession = require('express-session');
+// const expressSession = require('express-session');
 const bodyParser = require('body-parser');
 
 // Body Parser 
@@ -17,11 +17,11 @@ const expressValidator = require('express-validator');
 // validator
 app.use(expressValidator());
 // Session
-app.use(expressSession({
-	secret: process.env.SECRET,
-	resave: false,
-	saveUninitialized: false
-}));
+// app.use(expressSession({
+// 	secret: process.env.SECRET,
+// 	resave: false,
+// 	saveUninitialized: false
+// }));
 
 // global to access anywhere
 var session;
