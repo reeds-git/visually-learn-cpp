@@ -4,6 +4,7 @@ const pg = require('pg');
 var config = {};
 
 if (process.env.DATABASE_URL) {
+	
 	pg.defaults.ssl = true;
 	config = { connectionString : process.env.DATABASE_URL };
 }
