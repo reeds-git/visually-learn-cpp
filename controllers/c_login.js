@@ -5,6 +5,7 @@ const loginModel = require('../models/m_login.js');
 * Display the login form to log the user in
 **************************************************************************/
 function handelLoginPage(req, res) {
+
   res.render('login');
 }
 
@@ -23,9 +24,7 @@ function handelLogin(req,res) {
 **************************************************************************/
 function handelLogout(req,res) {
 
-	console.log("Logout");
-
-	loginModel.logout(function (err, result) {
+	loginModel.logout(req, function (err, result) {
 		res.json(result);
 	});
 }

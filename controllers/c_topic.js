@@ -5,8 +5,6 @@ const logicModel = require('../models/m_topic.js');
 **************************************************************************/
 function handelAll(req, res) {
 	
-	console.log("Return topics");
-
 	logicModel.getTopics(function(err, result) {
 		res.json(result);
 	});
@@ -17,8 +15,6 @@ function handelAll(req, res) {
 **************************************************************************/
 function handelTopicParams(req, res) {
 	
-	console.log("Return from parameters topic");
-
 	var topic = req.params.topic;
 
 	logicModel.getTopic(topic, function(err, result) {
@@ -31,8 +27,6 @@ function handelTopicParams(req, res) {
 **************************************************************************/
 function handelTopicQuery(req, res) {
 	
-	console.log("Return from query topic");
-
 	var topic = req.query.topic;
 
 	logicModel.getTopic(topic, function(err, result) {
@@ -45,8 +39,6 @@ function handelTopicQuery(req, res) {
 **************************************************************************/
 function handelSearchParams(req, res) {
 	
-	console.log("Return from parameters search");
-
 	var search = req.params.search;
 
 	logicModel.searchTopic(search, function(err, result) {
@@ -59,8 +51,6 @@ function handelSearchParams(req, res) {
 **************************************************************************/
 function handelSearchQuery(req, res) {
 	
-	console.log("Return from query search");
-
 	var search = req.query.search;
 
 	logicModel.searchTopic(search, function(err, result) {
@@ -82,7 +72,15 @@ function handelAddTopic(req, res) {
 * Display the form to add new content to the website
 **************************************************************************/
 function handelNewTopicPage(req, res) {
-  res.render('addTopic');
+
+	if (req.session.active == "yes") {
+
+		res.render('addTopic');
+
+	} else {
+
+		res.render('login');
+	}
 }
 
 /**************************************************************************

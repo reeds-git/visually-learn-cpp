@@ -33,22 +33,24 @@ function displayItem(data) {
 		var resultList = $("#result");
 		resultList.empty();
 
+		function toTitleCase(str) {
+   		return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+		}
+
 		var name = data[0].name;
-		var resultList = document.createElement("h2");
-		resultList.innerText = name;
-		document.getElementById("result").appendChild(resultList);
+		name = toTitleCase(name);
 
 		var description = data[0].description;
-		var resultList = document.createElement("h5");
-		resultList.innerText = description;
-		document.getElementById("result").appendChild(resultList);
-
 		var help_tip = data[0].help_tip;
-		var resultList = document.createElement("h5");
-		resultList.innerText = help_tip;
-		document.getElementById("result").appendChild(resultList);
-
 		var location = data[0].location;
+
+		$("#result").append("<li><h2>" + name + "</h2></li>");
+		$("#result").append("<li><h4>Description:</h4><h5>" + description + "</h5></li>");
+
+		if (help_tip) {
+			$("#result").append("<li><h5 id=\"help\">Tip:</h5><h5>" + help_tip + "</h5></li>");
+		}
+
 		var resultList = document.createElement("img");
 		resultList.src = "../images/" + location;
 		resultList.alt = location;

@@ -24,22 +24,15 @@ function login(info, callback) {
 		if (u_name == 'admin' && password == 'password') {
 
 			console.log("You have logged in");
-			//session.id = u_name;
+			
+			info.session.active = "yes";
+	
 			errorList = ["You have logged in"];
 			callback(null, errorList);
 
 		}	else {
 		
 			errorList = ["Please enter a valid User Name and Password"];
-
-		// $.post("/login", params, function(result) {
-			
-		// 	if (result && result.success) {
-		// 		$("#status").text("Successfully logged in.");
-		// 	} else {
-		// 		$("#status").text("Error logging in.");
-		// 	}
-		// });
 
 			callback(null, errorList);
 		}
@@ -49,10 +42,10 @@ function login(info, callback) {
 /**************************************************************************
 * log out to the system
 **************************************************************************/
-function logout(callback) {
+function logout(req1, callback) {
 
-console.log("           ssssssssssssssssssssss  ")
 	var result = { success: true };
+	req1.session.active = "no";
 
 	callback(null, result);
 }
@@ -83,7 +76,6 @@ function validateLoginForm(req2) {
 	var error = req2.validationErrors();
 
 	if (error) {
-		//req2.session.errors = error;
 
 		obj.errors = error;
 
@@ -111,8 +103,6 @@ function validateLoginForm(req2) {
 		obj.data = results;
 		obj.success = true;
 	}
-
-		console.log("username -"+obj.data.username);
 
 	return obj;
 }

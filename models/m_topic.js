@@ -4,7 +4,7 @@ const pg = require('pg');
 var config = {};
 
 if (process.env.DATABASE_URL) {
-	
+
 	pg.defaults.ssl = true;
 	config = { connectionString : process.env.DATABASE_URL };
 }
@@ -31,8 +31,6 @@ const pool = new pg.Pool(config);
 **********************************************************************/
 function getTopics(callback) {
 	  
-	console.log('Connected to postgres!');
-
 	var qStr = 'SELECT id, name FROM topic;';
 
   	pool.query(qStr, function (err, result) {
@@ -57,8 +55,6 @@ function getTopics(callback) {
 * get a specific topic
 **********************************************************************/
 function getTopic(topic, callback) {
-
-	console.log("x topic = " + topic);
 
 	topic = sanatize(topic);
 
@@ -94,8 +90,6 @@ function searchTopic(search, callback) {
 	search = sanatize(search);
 	  
 	search = '%'+search+'%';
-
-	console.log("x search = " + search);
 
 	var qStr = 'SELECT id, name FROM topic WHERE name LIKE $1;';
 
@@ -164,6 +158,10 @@ function addTopic(req1, callback) {
 	  		if(err) {
 
 	  		    errorList = ["Unable to add because the topic is a duplicate"];
+			
+			} else {
+
+				errorList = ["Topic added"];
 			}
 
 			callback(null, errorList);
@@ -195,7 +193,8 @@ function validateNewTopic(req2) {
 	var error = req2.validationErrors();
 
 	if (error) {
-		//req2.session.errors = error;
+
+console.log("Error                rrr");
 
 		obj.errors = error;
 

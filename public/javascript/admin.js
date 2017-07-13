@@ -5,9 +5,10 @@ function addTopic() {
 
 	var params = getParams();
 	var results = validateInput(params);
+		console.log("I made it ");
 
 	if (results.success) {
-
+console.log("I made it 44444444");
 		$.ajax({
 		  	type: "POST",
 		 	 url: "/add",
@@ -20,6 +21,10 @@ function addTopic() {
 			}
 		});
 	}
+	else {
+console.log("Errr 44444444");
+
+	}
 }
 
 /**************************************************************************
@@ -31,8 +36,7 @@ function validateInput(obj) {
 
 	if (obj.topicName != "" && obj.topicName != null &&
 		 obj.location != "" && obj.location != null && 
-		 obj.description != "" && obj.description != null &&
-		 obj.tip != "" && obj.tip != null ) {
+		 obj.description != "" && obj.description != null) {
 			
 		console.log("all filled out");
 
@@ -71,6 +75,9 @@ function getParams() {
 	var description = $("#description").val();
 	var tip = $("#tip").val();
 	var location = $("#location").val();
+
+console.log("Tip =" + tip +"*");
+
 		
 	var result = {
 			 success: true,
