@@ -26,16 +26,12 @@ app.use(expressSession({
 
 }));
 
-// global to access anywhere
-var session;
-
 const topicController = require('./controllers/c_topic.js');
 const loginController = require('./controllers/c_login.js');
 
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
-//app.use(favicon(__dirname + '/public/images/.ico'));
 
 // views is directory for all template files
 app.set('views', __dirname + '/views/pages');

@@ -36,9 +36,9 @@
 				</a>
 
 				<div class="right valign-wrapper">
-		         <input id="search" type="search" required>
+		         <input class="search-wrapper card white black-text" id="search" type="search">
 		         <label class="label-icon" for="search">
-		         <button type="button" onclick="sanatize();"><i class="material-icons">search</i></label></button>
+		         <button type="button" onclick="searchTopic();"><i class="material-icons">search</i></label></button>
 	         </div>
 	      </div>
 	   </nav>
@@ -48,6 +48,7 @@
 	</header>
 	<main class="white indent">
 		<div id="error" class="errorText right"></div>
+		<div id="title"></div>
 		<ul id="result"></ul>
 	</main>
 	<footer>

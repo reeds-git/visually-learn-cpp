@@ -88,7 +88,14 @@ function getTopic(topic, callback) {
 function searchTopic(search, callback) {
 
 	search = sanatize(search);
-	  
+	
+	if (search == "Error") {
+
+			var result = [{ cid: 0, name: "No results found. Please search again."}];
+ 			callback(null, result);
+ 			return;
+	}
+
 	search = '%'+search+'%';
 
 	var qStr = 'SELECT id, name FROM topic WHERE name LIKE $1;';
@@ -108,6 +115,13 @@ function searchTopic(search, callback) {
 						name: result.rows[i].name });
 				}
  		  
+ 		  	if (results[0] == null) {
+
+ 		  		results.push({
+						 cid: 0,
+						name: "No results found. Please search again."});
+ 		  	}
+
  			callback(null, results);
  		}
    });
@@ -118,7 +132,11 @@ function searchTopic(search, callback) {
 **********************************************************************/
 function sanatize(topic) {
 
-	clean = topic.toLowerCase();
+	if (topic == "" || topic == null) {
+		return "Error";
+	}
+
+	var clean = topic.toLowerCase();
 
 	clean = clean.replace(/[^a-z ]/g,'');
 
@@ -193,8 +211,6 @@ function validateNewTopic(req2) {
 	var error = req2.validationErrors();
 
 	if (error) {
-
-console.log("Error                rrr");
 
 		obj.errors = error;
 

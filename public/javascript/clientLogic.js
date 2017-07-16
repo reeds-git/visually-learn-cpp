@@ -85,6 +85,8 @@ function search(topic) {
 
 	$.get("/search/" + topic, function (data1, status) {
 	
+ 		document.getElementById("search").select();
+
 		displaySeach(data1);
 	});
 }
@@ -92,9 +94,9 @@ function search(topic) {
 /****************************************************************************
 * lowercase and remove everything but letters and spaces
 ****************************************************************************/
-function sanatize() {
+function searchTopic() {
 
-
+	// sanitize the data to reduce injection attacks
 	var text = document.getElementById("search").value;
 	clean = text.toLowerCase();
 
@@ -105,6 +107,8 @@ function sanatize() {
 		document.getElementById("error").innerHTML = "";
 
 		document.getElementById("result").innerHTML = "";
+
+		$("#title h5").remove();
 		
 		search(text);
 
@@ -118,6 +122,8 @@ function sanatize() {
 * create the list of topics found from the search
 ****************************************************************************/
 function displaySeach(obj) {
+
+	$("#title").append("<h5>Topics Found: (Click to view)</h5>");
 
 	for (var i = obj.length - 1; i >= 0; i--) {
 

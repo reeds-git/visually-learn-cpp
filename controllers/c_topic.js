@@ -15,6 +15,11 @@ function handelAll(req, res) {
 **************************************************************************/
 function handelTopicParams(req, res) {
 	
+	req.sanitize('topic').escape();
+
+	// trims spaces before and after
+	req.sanitize('topic').trim();
+
 	var topic = req.params.topic;
 
 	logicModel.getTopic(topic, function(err, result) {
@@ -27,6 +32,11 @@ function handelTopicParams(req, res) {
 **************************************************************************/
 function handelTopicQuery(req, res) {
 	
+	req.sanitize('topic').escape();
+
+	// trims spaces before and after
+	req.sanitize('topic').trim();
+
 	var topic = req.query.topic;
 
 	logicModel.getTopic(topic, function(err, result) {
@@ -39,6 +49,11 @@ function handelTopicQuery(req, res) {
 **************************************************************************/
 function handelSearchParams(req, res) {
 	
+	req.sanitize('search').escape();
+
+	// trims spaces before and after
+	req.sanitize('search').trim();
+
 	var search = req.params.search;
 
 	logicModel.searchTopic(search, function(err, result) {
@@ -51,6 +66,11 @@ function handelSearchParams(req, res) {
 **************************************************************************/
 function handelSearchQuery(req, res) {
 	
+	req.sanitize('search').escape();
+
+	// trims spaces before and after
+	req.sanitize('search').trim();
+
 	var search = req.query.search;
 
 	logicModel.searchTopic(search, function(err, result) {

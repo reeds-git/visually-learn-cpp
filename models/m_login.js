@@ -65,12 +65,13 @@ function validateLoginForm(req2) {
 	/****************************  Validate ************************/
 	req2.checkBody('username', 'Enter a user name').notEmpty();
 	req2.checkBody('username', 'User name must contain only letters').isAlpha();
-	//req2.check('username', 'User name must contain only letters').matches(/^[A-Za-z]+$/, "i");
 
 	req2.checkBody('password', 'Enter a password').notEmpty()
 	req2.checkBody('password', 'Passwords must contain at least 8 characters').len(8,2000);
+	
 	req2.checkBody('confirmPassword', 'Confirm the password').notEmpty()
 	req2.checkBody('confirmPassword', 'Must be 8 characters').len(8,2000);
+	
 	req2.check('password', 'Passwords don\'t match.').equals(req2.body.confirmPassword);
 
 	var error = req2.validationErrors();

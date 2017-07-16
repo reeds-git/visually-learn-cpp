@@ -5,10 +5,9 @@ function addTopic() {
 
 	var params = getParams();
 	var results = validateInput(params);
-		console.log("I made it ");
 
 	if (results.success) {
-console.log("I made it 44444444");
+
 		$.ajax({
 		  	type: "POST",
 		 	 url: "/add",
@@ -20,10 +19,6 @@ console.log("I made it 44444444");
 		  		}
 			}
 		});
-	}
-	else {
-console.log("Errr 44444444");
-
 	}
 }
 
@@ -75,9 +70,6 @@ function getParams() {
 	var description = $("#description").val();
 	var tip = $("#tip").val();
 	var location = $("#location").val();
-
-console.log("Tip =" + tip +"*");
-
 		
 	var result = {
 			 success: true,
