@@ -26,6 +26,9 @@ header, main, footer {
 	background-color: #bbdefb;
 }
 
+img {
+	border:2px solid black;
+}
 /* from stack overflow */
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    black;
