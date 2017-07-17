@@ -141,6 +141,8 @@ function getTopic(event) {
 
 	var topic = document.getElementById(event.id).text;
 
+	topic = topic.toLowerCase();
+
 	$.get("/display/" + topic, function (data1, status) {
 	
 		displayItem(data1);

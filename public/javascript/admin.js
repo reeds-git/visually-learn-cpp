@@ -39,9 +39,9 @@ function validateInput(obj) {
 
 	} else {
 
-		if (obj.topicName == "" || !(/^[A-Za-z ]+$/.test(obj.topicName))) {
+		if (obj.topicName == "" || obj.topicName == obj.topicName.toLowerCase()) {
 
-			errorMessage.push("*Enter a topic name that includes spaces and letters");
+			errorMessage.push("*Enter a topic name that includes spaces and lowercase letters");
 		}
 		
 		if (obj.description == "") {
@@ -71,6 +71,8 @@ function getParams() {
 	var tip = $("#tip").val();
 	var location = $("#location").val();
 		
+	topicName = topicName.toLowerCase();
+
 	var result = {
 			 success: true,
 		  topicName: topicName,

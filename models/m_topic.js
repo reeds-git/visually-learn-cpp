@@ -24,7 +24,7 @@ else
 //this initializes a connection pool
 //it will keep idle connections open for 30 seconds
 //and set a limit of maximum 10 idle clients
-const pool = new pg.Pool(config);
+var pool = new pg.Pool(config);
 
 /**********************************************************************
 * get the list of all topics
@@ -175,7 +175,7 @@ function addTopic(req1, callback) {
 
 	  		if(err) {
 
-	  		    errorList = ["*Unable to add because the topic is a duplicate"];
+	  		    errorList = ["*Unable to add because the topic or picture name is a duplicate"];
 			
 			} else {
 
@@ -201,7 +201,7 @@ function validateNewTopic(req2) {
 
 	/****************************  Validate ************************/
 	req2.checkBody('topicName', '*Enter a topic name').notEmpty();
-	req2.checkBody('topicName', '*Topics includes spaces and letters').matches(/^[A-Za-z ]+$/,"i");
+	req2.checkBody('topicName', '*Topics includes spaces and lowercase letters').matches(/^[a-z ]+$/,"i");
 
 	req2.checkBody('location', '*Enter a picture file name').notEmpty();
 	req2.check('location', '*File names must include letters and "." i.e. (file.gif)').matches(/^[A-Za-z0-9-]+\.[A-Za-z]{3}$/,"i");
