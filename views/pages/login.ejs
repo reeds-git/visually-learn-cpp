@@ -13,18 +13,18 @@
 	<main>
 		<div class="row">
 			<div class="col s12 m5 l5 offset-s6 push-s3 push-m3 push-l3">
-				<div class="card blue lighten-5">
+				<div class="card">
 					<div class="card-content">
-						<label for="username">User Name: </label>
-						<input type="text" id="username" placeholder="username">
-						<label for="password">Password: </label>
-						<input type="password" id="password" placeholder="password">
-						<label for="confirmPassword">confirm Password: </label>
-						<input type="password" id="confirmPassword" placeholder="password">
+						<label for="username" class="black-text">User Name: </label>
+						<input type="text" id="username">
+						<label for="password" class="black-text">Password: </label>
+						<input type="password" id="password">
+						<label for="confirmPassword" class="black-text">Confirm Password: </label>
+						<input type="password" id="confirmPassword">
 					</div>
-					<div class="card-action blue lighten-5">
-						<button class="btn" onclick="login();">Log in</button>
-						<button class="btn" onclick="logout();">Log out</button>
+					<div class="card-action">
+						<button class="btn blue lighten-1 black-text" onclick="login();">Log in</button>
+						<button class="btn blue lighten-1 black-text" onclick="logout();">Log out</button>
 					</div>
 					<div id="message" class="card-content hide">
 						<ul id="messageList">

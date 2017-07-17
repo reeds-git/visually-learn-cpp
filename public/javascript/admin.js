@@ -41,17 +41,17 @@ function validateInput(obj) {
 
 		if (obj.topicName == "" || !(/^[A-Za-z ]+$/.test(obj.topicName))) {
 
-			errorMessage.push("Enter a topic name that includes spaces and letters");
+			errorMessage.push("*Enter a topic name that includes spaces and letters");
 		}
 		
 		if (obj.description == "") {
 		
-			errorMessage.push("Please enter a description");
+			errorMessage.push("*Please enter a description");
 		}
 
 		if (obj.location == "" || !(/^[A-Za-z0-9-]+\.[A-Za-z]{3}$/.test(obj.location))) {
 		
-			errorMessage.push('Enter a file name that includes letters and "." (file.gif)');
+			errorMessage.push('*Enter a file name that includes letters and "." (file.gif)');
 		}
 
 		displayErrors(errorMessage);

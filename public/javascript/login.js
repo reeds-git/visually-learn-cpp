@@ -37,9 +37,12 @@ function logout() {
 	  success: function(data) {
 
 			if (data && data.success) {
-				$("#status").text("Successfully logged out.");
+
+				displayErrors(["Successfully logged out."]);
+
 			} else {
-				$("#status").text("Error logging out.");
+
+				displayErrors(["Error logging out."]);
 			}
 		}
 	});
@@ -63,17 +66,17 @@ function validateInput(obj) {
 	} else {
 
 		if (obj.username == "" || !(/^[A-Za-z]+$/.test(obj.username))) {
-			errorMessage.push("Please enter Valid User Name");
+			errorMessage.push("*Please enter Valid User Name");
 		}
 
 		if (obj.password.length < 8) {
 		
-			errorMessage.push("Passwords must be more than 8 characters");
+			errorMessage.push("*Passwords must be more than 8 characters");
 		}
 
 		if (obj.password !== obj.confirmPassword) {
 		
-			errorMessage.push("Passwords don't match");
+			errorMessage.push("*Passwords don't match");
 		}
 
 		displayErrors(errorMessage);

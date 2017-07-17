@@ -30,13 +30,13 @@
 
 		<nav class="blue lighten-1">
 			<div class="nav-wrapper">
-				<a href="/addTopic" class="brand-logo">- Learn C++ Visually </a>
+				<a href="/addTopic" class="brand-logo black-text">- Learn C++ Visually </a>
 				<a href="#" data-activates="mobile-demo" class="button-collapse">
 					<i class="material-icons">menu</i>
 				</a>
 
 				<div class="right valign-wrapper">
-		         <input class="search-wrapper card white black-text" id="search" type="search">
+		         <input class="search-wrapper card white" id="search" type="search">
 		         <label class="label-icon" for="search">
 		         <button type="button" onclick="searchTopic();"><i class="material-icons">search</i></label></button>
 	         </div>
@@ -48,8 +48,8 @@
 	</header>
 	<main class="white indent">
 		<div id="error" class="errorText right"></div>
-		<div id="title"></div>
-		<ul id="result"></ul>
+		<ul id="result" class="collection with-header"></ul>
+		<ul id="topic" class="collection with-header"></ul>
 	</main>
 	<footer>
 		

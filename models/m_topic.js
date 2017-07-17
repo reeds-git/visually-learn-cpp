@@ -175,7 +175,7 @@ function addTopic(req1, callback) {
 
 	  		if(err) {
 
-	  		    errorList = ["Unable to add because the topic is a duplicate"];
+	  		    errorList = ["*Unable to add because the topic is a duplicate"];
 			
 			} else {
 
@@ -200,13 +200,13 @@ function validateNewTopic(req2) {
 	};
 
 	/****************************  Validate ************************/
-	req2.checkBody('topicName', 'Enter a topic name').notEmpty();
-	req2.checkBody('topicName', 'Topics includes spaces and letters').matches(/^[A-Za-z ]+$/,"i");
+	req2.checkBody('topicName', '*Enter a topic name').notEmpty();
+	req2.checkBody('topicName', '*Topics includes spaces and letters').matches(/^[A-Za-z ]+$/,"i");
 
-	req2.checkBody('location', 'Enter a picture file name').notEmpty();
-	req2.check('location', 'File names must include letters and "." i.e. (file.gif)').matches(/^[A-Za-z0-9-]+\.[A-Za-z]{3}$/,"i");
+	req2.checkBody('location', '*Enter a picture file name').notEmpty();
+	req2.check('location', '*File names must include letters and "." i.e. (file.gif)').matches(/^[A-Za-z0-9-]+\.[A-Za-z]{3}$/,"i");
 
-	req2.checkBody('description', 'Enter a description').notEmpty();
+	req2.checkBody('description', '*Enter a description').notEmpty();
 
 	var error = req2.validationErrors();
 

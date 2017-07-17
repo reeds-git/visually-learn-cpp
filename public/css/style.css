@@ -17,6 +17,30 @@ header, main, footer {
 }
 
 #message {
-	color: red;
+	color: balck;
 	font-weight: bold;
+}
+
+.card {
+	border:5px solid black;
+	background-color: #bbdefb;
+}
+
+/* from stack overflow */
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    black;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    black;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    black;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    black;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    black;
 }

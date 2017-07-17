@@ -30,7 +30,7 @@ function displayItem(data) {
 
 	if (data && data.length > 0) {
 
-		var resultList = $("#result");
+		var resultList = $("#topic");
 		resultList.empty();
 
 		function toTitleCase(str) {
@@ -44,19 +44,18 @@ function displayItem(data) {
 		var help_tip = data[0].help_tip;
 		var location = data[0].location;
 
-		$("#result").append("<li><h2>" + name + "</h2></li>");
-		$("#result").append("<li><h4>Description:</h4><h5>" + description + "</h5></li>");
+		$("#topic").append("<li class=\"collection-header blue lighten-3\"><h4>" + name + "</h4></li>");
+		$("#topic").append("<li class=\"collection-item\"><h5>Description:</h5><h6>" + description + "</h6></li>");
 
 		if (help_tip) {
-			$("#result").append("<li><h5 id=\"help\">Tip:</h5><h5>" + help_tip + "</h5></li>");
+			$("#topic").append("<li class=\"collection-item\"><h5 id=\"help\">Tip:</h5><h6>" + help_tip + "</h6></li>");
 		}
 
-		var resultList = document.createElement("img");
-		resultList.src = "../images/" + location;
-		resultList.alt = location;
-		document.getElementById("result").appendChild(resultList);
+		$("#topic").append("<li class=\"collection-item responsive-img\"><img src=\"../images/"+location+"\" alt=\""+location+"\"></li>");
 
-		$("#result img").addClass("responsive-img");
+		// show only the topic
+		$("#result").addClass("hide");
+		$("#topic").removeClass("hide");
 	}
 }
 
@@ -70,7 +69,7 @@ function displayMenu(obj) {
 		var topic = obj[i].name;
 		var id = obj[i].cid;
 
-		$("#menu").append("<li><a id=\""+ id +"\" onclick=\"getTopic(this)\" class=\"btn\">"+topic+"</a></li>");
+		$("#menu").append("<li><a id=\""+ id +"\" onclick=\"getTopic(this)\" class=\"btn teal lighten-3 black-text\">"+topic+"</a></li>");
 	}
 
 	var name = $("#menu li:first").text();
@@ -105,16 +104,14 @@ function searchTopic() {
 	if (text == clean) {
 
 		document.getElementById("error").innerHTML = "";
-
-		document.getElementById("result").innerHTML = "";
-
-		$("#title h5").remove();
+		$("#result li").remove();
+		$("#topic li").remove();
 		
 		search(text);
 
 	} else {
 		
-		document.getElementById("error").innerHTML = "Please enter only letters and spaces";
+		document.getElementById("error").innerHTML = "*Please enter only letters and spaces";
 	}
 }
 
@@ -123,7 +120,7 @@ function searchTopic() {
 ****************************************************************************/
 function displaySeach(obj) {
 
-	$("#title").append("<h5>Topics Found: (Click to view)</h5>");
+	$("#result").append("<li class=\"collection-header blue lighten-3\"><h4>Topics Found: (Click to view)</h4></li>");
 
 	for (var i = obj.length - 1; i >= 0; i--) {
 
@@ -131,6 +128,9 @@ function displaySeach(obj) {
 		var id = obj[i].cid;
 
 		$("#result").append("<li><a id=\""+ id +"\" onclick=\"getTopic(this)\" class=\"btn-flat\">"+topic+"</a></li>");
+
+		$("#topic").addClass("hide");
+		$("#result").removeClass("hide");
 	}
 }
 
